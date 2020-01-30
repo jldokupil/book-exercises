@@ -41,11 +41,12 @@ summarize(flights, avg = mean(time_diff, na.rm = TRUE))
 
 # Create a data.frame of flights headed to SeaTac ('SEA'), only including the
 # origin, destination, and the "gain_in_air" column you just created
-ta_sea <- filter(flights, dest == "SEA")
-ta_sea <- select(ta_sea, origin, dest, time_diff)
+ta_sea <- filter(flights, dest == "SEA") %>% 
+  #select(origin, dest, time_diff) %>% 
 
 # On average, did flights to SeaTac gain or loose time?
-summarize(ta_sea, avg_delayed = mean(time_diff, na.rm = TRUE))
+  summarize(avg_delayed = mean(time_diff, na.rm = TRUE)) %>% 
+  pull(avg_delayed)
 
 
 # Consider flights from JFK to SEA. What was the average, min, and max air time
